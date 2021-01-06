@@ -176,7 +176,7 @@ public class LockedActivity extends Activity {
         setUserRestriction(UserManager.DISALLOW_FACTORY_RESET, active);
         setUserRestriction(UserManager.DISALLOW_ADD_USER, active);
         setUserRestriction(UserManager.DISALLOW_MOUNT_PHYSICAL_MEDIA, active);
-        setUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME, active);
+//        setUserRestriction(UserManager.DISALLOW_ADJUST_VOLUME, active);
 
         // disable keyguard and status bar
         mDevicePolicyManager.setKeyguardDisabled(mAdminComponentName, active);
@@ -197,18 +197,18 @@ public class LockedActivity extends Activity {
         // set this Activity as a lock task package
 
         mDevicePolicyManager.setLockTaskPackages(mAdminComponentName,
-                active ? new String[]{getPackageName()} : new String[]{});
+                active ? new String[]{"com.smarthomeassistant"} : new String[]{});
 
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MAIN);
-        intentFilter.addCategory(Intent.CATEGORY_HOME);
-        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+//        intentFilter.addCategory(Intent.CATEGORY_HOME);
+//        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
 
         if (active) {
             // set Cosu activity as home intent receiver so that it is started
             // on reboot
             mDevicePolicyManager.addPersistentPreferredActivity(
                     mAdminComponentName, intentFilter, new ComponentName(
-                            getPackageName(), LockedActivity.class.getName()));
+                            getPackageName(), "com.smarthomeassistant.MainActivity"));
         } else {
             mDevicePolicyManager.clearPackagePersistentPreferredActivities(
                     mAdminComponentName, getPackageName());
@@ -233,12 +233,12 @@ public class LockedActivity extends Activity {
                     Integer.toString(BatteryManager.BATTERY_PLUGGED_AC
                         | BatteryManager.BATTERY_PLUGGED_USB
                         | BatteryManager.BATTERY_PLUGGED_WIRELESS));
-        } else {
-            mDevicePolicyManager.setGlobalSetting(
-                    mAdminComponentName,
-                    Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
-                    "0"
-                    );
+//        } else {
+//            mDevicePolicyManager.setGlobalSetting(
+//                    mAdminComponentName,
+//                    Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
+//                    "0"
+//                    );
         }
     }
 }

@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("Test", this.getClass().getName());
         takePicButton = (Button) findViewById(R.id.pic_button);
         takePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,6 @@ public class MainActivity extends Activity {
                 }
             }
         });
-
         mDevicePolicyManager = (DevicePolicyManager)
                 getSystemService(Context.DEVICE_POLICY_SERVICE);
 
@@ -151,6 +150,7 @@ public class MainActivity extends Activity {
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP);
         }
+        lockTaskButton.setEnabled(true);
     }
 
     private File createImageFile() throws IOException {
@@ -234,6 +234,6 @@ public class MainActivity extends Activity {
         imageView.setImageBitmap(imageBitmap);
 
         // enable lock task button
-        lockTaskButton.setEnabled(true);
+
     }
 }
