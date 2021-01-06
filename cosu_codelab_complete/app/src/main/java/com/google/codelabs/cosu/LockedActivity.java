@@ -203,6 +203,10 @@ public class LockedActivity extends Activity {
 //        intentFilter.addCategory(Intent.CATEGORY_HOME);
 //        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
 
+        // enable system info 
+        mDevicePolicyManager.setLockTaskFeatures(mAdminComponentName, 
+              DevicePolicyManager.LOCK_TASK_FEATURE_SYSTEM_INFO | DevicePolicyManager.LOCK_TASK_FEATURE_GLOBAL_ACTIONS);
+
         if (active) {
             // set Cosu activity as home intent receiver so that it is started
             // on reboot
